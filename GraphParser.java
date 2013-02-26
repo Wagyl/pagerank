@@ -2,7 +2,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.StringTokenizer;
 
 import au.com.bytecode.opencsv.CSVReader;
@@ -13,12 +15,14 @@ public class GraphParser {
 	private CSVReader reader;
 	private List<Peer> resList;
 	private String source;
+	private Map<Integer, List<Integer>> resMap;
 
 	public GraphParser(String source) throws FileNotFoundException {
 		this.max = 0;
 		this.source = source;
 		this.reader = new CSVReader(new FileReader(source));
 		this.resList = new ArrayList<Peer>();
+		this.resMap = new HashMap<Integer, List<Integer>>();
 	}
 
 	/* Parse le fichier ligne par ligne en virant les commentaires */
@@ -32,12 +36,12 @@ public class GraphParser {
 				try {
 					this.resList.add(parseLine(nextLine[0]));
 				} catch (BadLineFormatException e) {
-					System.err.println("Ligne ignorŽe " + count
+					System.err.println("Ligne ignorï¿½e " + count
 							+ " - Bad Format");
 				}
 			count++;
 		}
-		System.out.println("Parsing terminŽ");
+		System.out.println("Parsing terminï¿½");
 	}
 
 	/* Parse une ligne pour en faire des token */
@@ -56,12 +60,60 @@ public class GraphParser {
 		return res;
 	}
 
-	/* RŽcupŽrer le max */
+	/* */
+	public void altWork() throws IOException {
+		String[] nextLine;
+		int count = 1;
+
+		System.out.println("Parsing de : " + this.source);
+		while ((nextLine = reader.readNext()) != null) {
+			if (!nextLine[0].startsWith("#"))
+				try {
+					altParseLine(nextLine[0]);
+				} catch (BadLineFormatException e) {
+					System.err.println("Ligne ignorï¿½e " + count
+							+ " - Bad Format");
+				}
+			count++;
+		}
+		System.out.println("Parsing terminï¿½");
+	}
+
+	/* */
+	private void altParseLine(String line) throws BadLineFormatException {
+		int tmpKey, tmpVal;
+		StringTokenizer st = new StringTokenizer(line);
+
+		if (st.countTokens() != 2)
+			throw new BadLineFormatException();
+
+		tmpKey = Integer.parseInt(st.nextToken());
+		tmpVal = Integer.parseInt(st.nextToken());
+
+		if (tmpKey > max)
+			max = tmpKey;
+
+		majMap(tmpKey, tmpVal);
+	}
+
+	/* Mise Ã  jour de la Map */
+	private void majMap(int key, int val) {
+		List<Integer> tmpList = this.resMap.get(key);
+
+		if (tmpList == null) {
+			tmpList = new ArrayList<Integer>();
+			tmpList.add(val);
+			this.resMap.put(key, tmpList);
+		} else
+			tmpList.add(val);
+	}
+
+	/* Rï¿½cupï¿½rer le max */
 	public int getMax() {
 		return this.max;
 	}
 
-	/* RŽcupŽrer la liste */
+	/* Rï¿½cupï¿½rer la liste */
 	public List<Peer> getList() {
 		return this.resList;
 	}
