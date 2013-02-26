@@ -22,7 +22,7 @@ public class MainTest {
 	public String loadFile(String addr) {
 		return this.getClass().getResource("web-Stanford.txt").getPath();
 	}
-	
+
 	public static void mainparser() {
 		try {
 			GraphParser parsed = new GraphParser(
@@ -34,7 +34,7 @@ public class MainTest {
 			for (Peer p : parsed.getList()) {
 				graphStanford.addArc(p.fst(), p.snd());
 				if (i % 10000 == 0)
-					System.out.print(" ... " +(i*100/max) +"%   ");
+					System.out.print(" ... " + (i * 100 / max) + "%   ");
 				i++;
 			}
 			System.out.println();
@@ -84,22 +84,17 @@ public class MainTest {
 		graph.stoch().print();
 
 		System.out.println();
-		
+
 		/*
 		 * Test rapide de Graph (insertion + calcul de la matrice stochastique.
 		 */
 		/*
-		Graph graphbis = new Graph();
-		graphbis.add(0, 1);
-		graphbis.add(1, 0);
-		graphbis.add(1, 2);
-		graphbis.add(2, 3);
-		graphbis.add(3, 0);
-		
-		graphbis.stoch().print();
-		System.out.println();
+		 * Graph graphbis = new Graph(); graphbis.add(0, 1); graphbis.add(1, 0);
+		 * graphbis.add(1, 2); graphbis.add(2, 3); graphbis.add(3, 0);
+		 * 
+		 * graphbis.stoch().print(); System.out.println();
 		 */
-		
+
 		List<Float> z = translate(new float[] { new Float(0.25),
 				new Float(0.25), new Float(0.25), new Float(0.25) });
 		List<Float> z0 = translate(new float[] { new Float(1), 0, 0, 0 });
@@ -111,5 +106,28 @@ public class MainTest {
 		 */
 		// mainparser();
 
+		/*
+		 * Test méthode parse de Graph.
+		 */
+
+		Graph maingraph = new Graph();
+		
+		System.out.println("Parsing...");
+		try {
+			maingraph.parse((new MainTest()).loadFile("web-Stanford.txt"));
+		} catch (FileNotFoundException e) {
+			System.out.println("Fichier non trouvé");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		System.out.println("Parsing done.");
+		
+		System.out.println("Stochastique computation...");
+		FMatrix mainstoch = maingraph.stoch();
+		System.out.println("Stochastique computation done.");
+		
+		System.out.println("Result :");
+		System.out.println(mainstoch.get(1, 6548) + "    " +mainstoch.get(1, 6547));
 	}
 }
