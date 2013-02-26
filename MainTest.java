@@ -51,7 +51,7 @@ public class MainTest {
 		 * mm.print();
 		 */
 
-		Graph graph = new Graph(4);
+		GraphMatrix graph = new GraphMatrix(4);
 		graph.addArc(0, 1);
 		graph.addArc(1, 0);
 		graph.addArc(1, 2);
@@ -65,22 +65,29 @@ public class MainTest {
 		List<Float> z = translate(new float[] { new Float(0.25),
 				new Float(0.25), new Float(0.25), new Float(0.25) });
 		List<Float> z0 = translate(new float[] { new Float(1), 0, 0, 0 });
-		z = Graph.pagerank(graph.stoch(), z0, 1004);
+		z = GraphMatrix.pagerank(graph.stoch(), z0, 1004);
 		print(z);
 
 		/*
-		 * Test fichier Stanford, ˆ complŽter
+		 * Test fichier Stanford, ï¿½ complï¿½ter
 		 */
 		try {
 			GraphParser parsed = new GraphParser(
 					(new MainTest()).loadFile("web-Stanford.txt"));
 			parsed.work();
-			Graph graphStanford = new Graph(parsed.getMax());
-			for (Peer p : parsed.getList())
+			GraphMatrix graphStanford = new GraphMatrix(parsed.getMax());
+			int max = parsed.getMax();
+			int i = 0;
+			for (Peer p : parsed.getList()) {
 				graphStanford.addArc(p.fst(), p.snd());
+				if (i % 10000 == 0)
+					System.out.print(" ... " +(i*100/max) +"%   ");
+				i++;
+			}
+			System.out.println();
 			System.out.println("Graph construit");
 		} catch (FileNotFoundException e) {
-			System.out.println("Fichier non trouvŽ");
+			System.out.println("Fichier non trouvï¿½");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
