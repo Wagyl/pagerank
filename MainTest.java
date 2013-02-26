@@ -22,6 +22,29 @@ public class MainTest {
 	public String loadFile(String addr) {
 		return this.getClass().getResource("web-Stanford.txt").getPath();
 	}
+	
+	public static void mainparser() {
+		try {
+			GraphParser parsed = new GraphParser(
+					(new MainTest()).loadFile("web-Stanford.txt"));
+			parsed.work();
+			GraphMatrix graphStanford = new GraphMatrix(parsed.getMax());
+			int max = parsed.getMax();
+			int i = 0;
+			for (Peer p : parsed.getList()) {
+				graphStanford.addArc(p.fst(), p.snd());
+				if (i % 10000 == 0)
+					System.out.print(" ... " +(i*100/max) +"%   ");
+				i++;
+			}
+			System.out.println();
+			System.out.println("Graph construit");
+		} catch (FileNotFoundException e) {
+			System.out.println("Fichier non trouvé");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	public static void main(String[] args) {
 
@@ -41,7 +64,7 @@ public class MainTest {
 		// print(vect);
 
 		List<Float> r = m.multT(vect);
-		print(r);
+		// print(r);
 
 		/*
 		 * FMatrix mm = new FMatrix(4); mm.set(0, 1, new Float(3)); mm.set(0, 2,
@@ -61,7 +84,22 @@ public class MainTest {
 		graph.stoch().print();
 
 		System.out.println();
-
+		
+		/*
+		 * Test rapide de Graph (insertion + calcul de la matrice stochastique.
+		 */
+		/*
+		Graph graphbis = new Graph();
+		graphbis.add(0, 1);
+		graphbis.add(1, 0);
+		graphbis.add(1, 2);
+		graphbis.add(2, 3);
+		graphbis.add(3, 0);
+		
+		graphbis.stoch().print();
+		System.out.println();
+		 */
+		
 		List<Float> z = translate(new float[] { new Float(0.25),
 				new Float(0.25), new Float(0.25), new Float(0.25) });
 		List<Float> z0 = translate(new float[] { new Float(1), 0, 0, 0 });
@@ -69,28 +107,9 @@ public class MainTest {
 		print(z);
 
 		/*
-		 * Test fichier Stanford, � compl�ter
+		 * Test fichier Stanford, à compléter
 		 */
-		try {
-			GraphParser parsed = new GraphParser(
-					(new MainTest()).loadFile("web-Stanford.txt"));
-			parsed.work();
-			GraphMatrix graphStanford = new GraphMatrix(parsed.getMax());
-			int max = parsed.getMax();
-			int i = 0;
-			for (Peer p : parsed.getList()) {
-				graphStanford.addArc(p.fst(), p.snd());
-				if (i % 10000 == 0)
-					System.out.print(" ... " +(i*100/max) +"%   ");
-				i++;
-			}
-			System.out.println();
-			System.out.println("Graph construit");
-		} catch (FileNotFoundException e) {
-			System.out.println("Fichier non trouv�");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		// mainparser();
 
 	}
 }
