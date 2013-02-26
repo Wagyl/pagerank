@@ -12,6 +12,10 @@ public class FMatrix extends Matrix<Float> {
 		super(size);
 	}
 	
+	public FMatrix(List<Integer> L, List<Float> C, List<Integer> I) {
+		super(L, C, I);
+	}
+	
 	public FMatrix(List<Float> matrix, int width, int height) {
 		super(matrix, width, height);
 	}

@@ -20,6 +20,12 @@ public abstract class Matrix <T> {
 	public int size() {
 		return L.size() - 1;
 	}
+	
+	public Matrix(List<Integer> L, List<T> C, List<Integer> I) {
+		this.C = C;
+		this.L = L;
+		this.I = I;
+	}
 
 	public Matrix(List<T> matrix, int width, int height) {
 		L = new ArrayList<Integer>(height + 1);
