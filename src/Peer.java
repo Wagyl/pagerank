@@ -8,22 +8,22 @@ public class Peer {
 		this.pos = 0;
 	}
 
-	/* Maj du premier élément */
+	/* Maj du premier √©l√©ment */
 	public void addFst(int toAdd) {
 		this.firstElement = toAdd;
 	}
 
-	/* Maj du second élément */
+	/* Maj du second √©l√©ment */
 	public void addSnd(int toAdd) {
 		this.secondElement = toAdd;
 	}
 
-	/* Fonction utilitaire privée */
+	/* Fonction utilitaire priv√©e */
 	private void majPos() {
 		pos = (pos + 1) % 2;
 	}
 
-	/* Maj séquentielle de la paire */
+	/* Maj s√©quentielle de la paire */
 	public void add(int toAdd) {
 		switch (pos) {
 		case 0:
@@ -36,12 +36,12 @@ public class Peer {
 		majPos();
 	}
 
-	/* Récupérer le premier élément de la paire */
+	/* R√©cup√©rer le premier √©l√©ment de la paire */
 	public int fst() {
 		return this.firstElement;
 	}
 
-	/* Récupérer le second élément de la paire */
+	/* R√©cup√©rer le second √©l√©ment de la paire */
 	public int snd() {
 		return this.secondElement;
 	}
