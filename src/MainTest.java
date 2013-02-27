@@ -120,42 +120,8 @@ public class MainTest {
 		 * Test méthode parse de Graph.
 		 */
 
-		System.out.println("Parsing...");
-		try {
-			Graph maingraph = new Graph();
-			maingraph.build((new MainTest()).loadFile("web-Stanford.txt"));
-
-			System.out.println("Parsing done.");
-
-			System.out.println("Stochastique computation...");
-			FMatrix mainstoch = maingraph.stoch();
-			System.out.println("Stochastique computation done.");
-
-			System.out.println("Result :");
-			System.out.println(mainstoch.get(1, 6548) + "    "
-					+ mainstoch.get(1, 6547));
-			System.out.println(mainstoch.get(71616, 165189) + "    " +mainstoch.get(71616, 141370) 
-					+ "   " +mainstoch.get(71616, 165181));
-			
-			int size = maingraph.size() +1;
-			float value = (float) 1 / size;
-			System.out.println("size : " +size);
-			System.out.println("value : " +value);
-			FVect z0 = new FVect(size, value);
-
-			System.out.println("size : " +mainstoch.size());
-			int count = 100;
-			System.out.println("Calcul de pagerank : " + count + " itérations...");
-			z0 = Graph.pagerank(mainstoch, z0, count);
-			System.out.println("Calcul terminé.");
-			
-			System.out.println(z0.get(2));			
-			
-		} catch (FileNotFoundException e) {
-			System.out.println("Fichier non trouvé");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		
+		(new Test("web-Stanford.txt", true)).pagerank(fl(0), 100);
 
 	}
 }

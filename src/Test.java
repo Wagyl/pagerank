@@ -31,8 +31,15 @@ public class Test {
 	}
 	
 	
-	public void pagerank(float zap, Vect<Float> z0, int count) {
+	public void pagerank(float zap, int count) {
+		int size = graph.size() +1;
+		float value = (float) 1 / size;
+		FVect z0 = new FVect(size, value);
+		System.out.println("Pagerank computation : " + count + " itérations...");
+		z0 = Graph.zapPagerank(stochastic, z0, count, zap);
+		System.out.println("Computation done.");
 		
+		System.out.println(z0.get(2));	
 	}
 
 }
