@@ -25,7 +25,7 @@ public class MainTest {
 
 	public static void mainparser() {
 		try {
-			GraphParser parsed = new GraphParser(
+			GraphParserDeprecated parsed = new GraphParserDeprecated(
 					(new MainTest()).loadFile("web-Stanford.txt"));
 			parsed.work();
 			GraphMatrix graphStanford = new GraphMatrix(parsed.getMax());
@@ -110,24 +110,25 @@ public class MainTest {
 		 * Test méthode parse de Graph.
 		 */
 
-		Graph maingraph = new Graph();
-		
 		System.out.println("Parsing...");
 		try {
-			maingraph.parse((new MainTest()).loadFile("web-Stanford.txt"));
+			Graph maingraph = new Graph();
+			maingraph.build((new MainTest()).loadFile("web-Stanford.txt"));
+
+			System.out.println("Parsing done.");
+
+			System.out.println("Stochastique computation...");
+			FMatrix mainstoch = maingraph.stoch();
+			System.out.println("Stochastique computation done.");
+
+			System.out.println("Result :");
+			System.out.println(mainstoch.get(1, 6548) + "    "
+					+ mainstoch.get(1, 6547));
 		} catch (FileNotFoundException e) {
 			System.out.println("Fichier non trouvé");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-		System.out.println("Parsing done.");
-		
-		System.out.println("Stochastique computation...");
-		FMatrix mainstoch = maingraph.stoch();
-		System.out.println("Stochastique computation done.");
-		
-		System.out.println("Result :");
-		System.out.println(mainstoch.get(1, 6548) + "    " +mainstoch.get(1, 6547));
 	}
 }

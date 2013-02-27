@@ -1,11 +1,8 @@
-import java.io.FileReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.StringTokenizer;
-
-import au.com.bytecode.opencsv.CSVReader;
 
 public class Graph {
 
@@ -18,11 +15,18 @@ public class Graph {
 	private int size;
 	/* Nombre d'arcs */
 	private int bindsCount;
+	/* Parser */
+	GraphParser parser;
 
-	public Graph() {
+	public Graph() throws FileNotFoundException {
 		this.data = new HashMap<Integer, List<Integer>>();
 		this.size = 0;
 		this.bindsCount = 0;
+		this.parser = new GraphParser(this);
+	}
+
+	public void build(String source) throws IOException {
+		this.parser.parseFile(source);
 	}
 
 	public void add(Integer node, Integer arc) {
@@ -62,50 +66,11 @@ public class Graph {
 					C.add(value);
 					I.add(arc);
 				}
-			}
-			else
+			} else
 				L.add(L.get(node));
 		}
 
 		FMatrix stoch = new FMatrix(L, C, I);
 		return stoch;
 	}
-
-	/* */
-	public void parse(String source) throws IOException {
-		CSVReader reader = new CSVReader(new FileReader(source));
-
-		String[] nextLine;
-		int count = 1;
-
-		System.out.println("Parsing de : " + source);
-		while ((nextLine = reader.readNext()) != null) {
-			if (!nextLine[0].startsWith("#"))
-				try {
-					parseLine(nextLine[0]);
-				} catch (BadLineFormatException e) {
-					System.err.println("Ligne ignorée " + count
-							+ " - Bad Format");
-				}
-			count++;
-		}
-		System.out.println("Parsing terminé");
-
-		reader.close();
-	}
-
-	/* */
-	private void parseLine(String line) throws BadLineFormatException {
-		int tmpKey, tmpVal;
-		StringTokenizer st = new StringTokenizer(line);
-
-		if (st.countTokens() != 2)
-			throw new BadLineFormatException();
-
-		tmpKey = Integer.parseInt(st.nextToken());
-		tmpVal = Integer.parseInt(st.nextToken());
-
-		this.add(tmpKey, tmpVal);
-	}
-
 }
