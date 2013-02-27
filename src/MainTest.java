@@ -5,6 +5,13 @@ import java.util.List;
 
 public class MainTest {
 
+	public static Float fl(int i) {
+		return new Float(i);
+	}
+	public static Float fl(double d) {
+		return new Float(d);
+	}
+	
 	public static List<Float> translate(float[] tab) {
 		List<Float> res = new ArrayList<Float>(tab.length);
 		for (int i = 0; i < tab.length; i++) {
@@ -60,11 +67,9 @@ public class MainTest {
 		 * System.out.print(m.get(i, j) + " "); } System.out.println(""); }
 		 */
 
-		List<Float> vect = translate(new float[] { 1, 3, 0, 1 });
-		// print(vect);
-
-		List<Float> r = m.multT(vect);
-		// print(r);
+		Vect<Float> vect = new Vect<Float>(new Float[] {fl(1), fl(3), fl(0), fl(1)});
+		Vect<Float> r = m.multT(vect);
+		//System.out.println(r.toString());
 
 		/*
 		 * FMatrix mm = new FMatrix(4); mm.set(0, 1, new Float(3)); mm.set(0, 2,
@@ -95,11 +100,11 @@ public class MainTest {
 		 * graphbis.stoch().print(); System.out.println();
 		 */
 
-		List<Float> z = translate(new float[] { new Float(0.25),
-				new Float(0.25), new Float(0.25), new Float(0.25) });
-		List<Float> z0 = translate(new float[] { new Float(1), 0, 0, 0 });
-		z = GraphMatrix.pagerank(graph.stoch(), z0, 1004);
-		print(z);
+		Vect<Float> z = new Vect<Float>(4, fl(0.25));
+		Vect<Float> z1 = new Vect<Float>(4, fl(0));
+		z1.set(0,  fl(1));
+		z = GraphMatrix.pagerank(graph.stoch(), z, 1004);
+		System.out.println(z.toString());
 
 		/*
 		 * Test fichier Stanford, à compléter
@@ -124,6 +129,23 @@ public class MainTest {
 			System.out.println("Result :");
 			System.out.println(mainstoch.get(1, 6548) + "    "
 					+ mainstoch.get(1, 6547));
+			System.out.println(mainstoch.get(71616, 165189) + "    " +mainstoch.get(71616, 141370) 
+					+ "   " +mainstoch.get(71616, 165181));
+			
+			int size = maingraph.size() +1;
+			float value = (float) 1 / size;
+			System.out.println("size : " +size);
+			System.out.println("value : " +value);
+			Vect<Float> z0 = new Vect<Float>(size, value);
+
+			System.out.println("size : " +mainstoch.size());
+			int count = 100;
+			System.out.println("Calcul de pagerank : " + count + " itérations...");
+			z0 = Graph.pagerank(mainstoch, z0, count);
+			System.out.println("Calcul terminé.");
+			
+			System.out.println(z0.get(2));			
+			
 		} catch (FileNotFoundException e) {
 			System.out.println("Fichier non trouvé");
 		} catch (IOException e) {

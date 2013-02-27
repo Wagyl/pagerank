@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
 
 /*
  * Graphe représenté comme matrice de booléen.
@@ -31,16 +29,14 @@ public class GraphMatrix extends BMatrix {
 	}
 	
 	
-	public List<Float> pagerank0(int count) {
-		List<Float> z = new ArrayList<Float>(this.size());
-		z.add(new Float(1));
-		for (int i = 1; i < this.size(); i++) 
-			z.add(new Float(0));
+	public Vect<Float> pagerank0(int count) {
+		Vect<Float> z = new Vect<Float>(this.size(), new Float(0));
+		z.set(0, new Float(1));
 		return GraphMatrix.pagerank(this.stoch(), z, count);
 	}
 
-	public static List<Float> pagerank(FMatrix m, List<Float> z, int count) {
-		List<Float> tmp = z;
+	public static Vect<Float> pagerank(FMatrix m, Vect<Float> z, int count) {
+		Vect<Float> tmp = z;
 		for (int i = 0; i < count; i++) {
 			tmp = m.multT(tmp);
 		}

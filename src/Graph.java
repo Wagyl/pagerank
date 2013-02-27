@@ -73,4 +73,18 @@ public class Graph {
 		FMatrix stoch = new FMatrix(L, C, I);
 		return stoch;
 	}
+
+	public Vect<Float> pagerank0(int count) {
+		Vect<Float> z = new Vect<Float>(this.size(), new Float(0));
+		z.set(0, new Float(1));
+		return GraphMatrix.pagerank(this.stoch(), z, count);
+	}
+
+	public static Vect<Float> pagerank(FMatrix m, Vect<Float> z, int count) {
+		Vect<Float> tmp = z;
+		for (int i = 0; i < count; i++) {
+			tmp = m.multT(tmp);
+		}
+		return tmp;
+	}
 }

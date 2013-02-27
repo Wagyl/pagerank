@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.List;
 
 public class FMatrix extends Matrix<Float> {
@@ -23,10 +22,10 @@ public class FMatrix extends Matrix<Float> {
 	/*
 	 * Multiplication par un vecteur.
 	 */
-	public List<Float> mult(List<Float> l) {
+	public Vect<Float> mult(Vect<Float> l) {
 		if (l.size() != this.C.size() - 1)
 			return null;
-		List<Float> res = new ArrayList<Float>();
+		Vect<Float> res = new Vect<Float>();
 		int max = l.size();
 		float tmp = 0;
 		for (int i = 0; i < l.size(); i++) {
@@ -41,15 +40,12 @@ public class FMatrix extends Matrix<Float> {
 	/*
 	 * Multiplication transposée
 	 */
-	public List<Float> multT(List<Float> vect) {
+	public Vect<Float> multT(Vect<Float> vect) {
 		int size = this.L.size() - 1;
 		if (vect.size() != size)
 			return null;
 
-		List<Float> res = new ArrayList<Float>(size);
-		for (int i = 0; i < size; i++) {
-			res.add(new Float(0));
-		}
+		Vect<Float> res = new Vect<Float>(size, new Float(0));
 
 		for (int row = 0; row < size; row++) {
 
