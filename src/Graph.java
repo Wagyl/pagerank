@@ -74,17 +74,45 @@ public class Graph {
 		return stoch;
 	}
 
-	public Vect<Float> pagerank0(int count) {
-		Vect<Float> z = new Vect<Float>(this.size(), new Float(0));
+	public FVect pagerank0(int count) {
+		FVect z = new FVect(this.size(), new Float(0));
 		z.set(0, new Float(1));
-		return GraphMatrix.pagerank(this.stoch(), z, count);
+		return Graph.pagerank(this.stoch(), z, count);
+	}
+	
+	public FVect pagerank1(int count) {
+		Float value = new Float((float) 1 / this.size());
+		FVect z = new FVect(this.size(), value);
+		return Graph.pagerank(this.stoch(), z, count);
 	}
 
-	public static Vect<Float> pagerank(FMatrix m, Vect<Float> z, int count) {
-		Vect<Float> tmp = z;
+	public static FVect pagerank(FMatrix m, FVect z, int count) {
+		FVect tmp = z;
 		for (int i = 0; i < count; i++) {
-			tmp = m.multT(tmp);
+			try {
+				tmp = m.multT(tmp);
+			} catch (IncompatibleSize e) {
+				e.printStackTrace();
+				return null;
+			}
 		}
 		return tmp;
+	}
+	
+	public static FVect zapPagerank(FMatrix m, FVect z, int count, float zap) {
+		FVect tmp = z;
+		float size = z.size();
+		for (int i = 0; i < count; i++) {
+			try {
+				tmp = m.multT(tmp);
+				tmp.op_mul(1 - zap);
+				tmp.op_add(zap / size);
+			} catch (IncompatibleSize e) {
+				e.printStackTrace();
+				return null;
+			}
+		}
+		return tmp;
+		
 	}
 }

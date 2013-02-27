@@ -25,6 +25,8 @@ public class MainTest {
 			System.out.print(l.get(i) + " ");
 		System.out.println();
 	}
+	
+	
 
 	public String loadFile(String addr) {
 		return this.getClass().getResource(addr).getPath();
@@ -67,8 +69,11 @@ public class MainTest {
 		 * System.out.print(m.get(i, j) + " "); } System.out.println(""); }
 		 */
 
-		Vect<Float> vect = new Vect<Float>(new Float[] {fl(1), fl(3), fl(0), fl(1)});
-		Vect<Float> r = m.multT(vect);
+		FVect vect = new FVect(new Float[] {fl(1), fl(3), fl(0), fl(1)});
+		try {
+			FVect r = m.multT(vect);
+		} catch (IncompatibleSize e1) {
+		}
 		//System.out.println(r.toString());
 
 		/*
@@ -100,10 +105,10 @@ public class MainTest {
 		 * graphbis.stoch().print(); System.out.println();
 		 */
 
-		Vect<Float> z = new Vect<Float>(4, fl(0.25));
-		Vect<Float> z1 = new Vect<Float>(4, fl(0));
+		FVect z = new FVect(4, fl(0.25));
+		FVect z1 = new FVect(4, fl(0));
 		z1.set(0,  fl(1));
-		z = GraphMatrix.pagerank(graph.stoch(), z, 1004);
+		z = Graph.pagerank(graph.stoch(), z, 1004);
 		System.out.println(z.toString());
 
 		/*
@@ -136,7 +141,7 @@ public class MainTest {
 			float value = (float) 1 / size;
 			System.out.println("size : " +size);
 			System.out.println("value : " +value);
-			Vect<Float> z0 = new Vect<Float>(size, value);
+			FVect z0 = new FVect(size, value);
 
 			System.out.println("size : " +mainstoch.size());
 			int count = 100;

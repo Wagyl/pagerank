@@ -22,10 +22,10 @@ public class FMatrix extends Matrix<Float> {
 	/*
 	 * Multiplication par un vecteur.
 	 */
-	public Vect<Float> mult(Vect<Float> l) {
+	public FVect mult(Vect<Float> l) throws IncompatibleSize {
 		if (l.size() != this.C.size() - 1)
-			return null;
-		Vect<Float> res = new Vect<Float>();
+			throw new IncompatibleSize();
+		FVect res = new FVect();
 		int max = l.size();
 		float tmp = 0;
 		for (int i = 0; i < l.size(); i++) {
@@ -40,12 +40,12 @@ public class FMatrix extends Matrix<Float> {
 	/*
 	 * Multiplication transposée
 	 */
-	public Vect<Float> multT(Vect<Float> vect) {
+	public FVect multT(FVect vect) throws IncompatibleSize {
 		int size = this.L.size() - 1;
 		if (vect.size() != size)
-			return null;
+			throw new IncompatibleSize();
 
-		Vect<Float> res = new Vect<Float>(size, new Float(0));
+		FVect res = new FVect(size, new Float(0));
 
 		for (int row = 0; row < size; row++) {
 
