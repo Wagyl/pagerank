@@ -20,7 +20,7 @@ public class MainTest {
 	}
 
 	public String loadFile(String addr) {
-		return this.getClass().getResource("web-Stanford.txt").getPath();
+		return this.getClass().getResource(addr).getPath();
 	}
 
 	public static void mainparser() {
