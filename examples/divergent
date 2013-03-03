@@ -1,0 +1,15 @@
+# Graphe fortement connexe, mais pgcd des longueurs des circuits = 3
+
+# Convergence si vecteur initial uniforme ou si facteur zap non nul.
+
+# Nodes = 6
+# Edges = 7
+
+0 1
+1 2
+2 0
+
+2 3
+3 4
+4 5
+5 0

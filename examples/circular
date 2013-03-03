@@ -1,0 +1,10 @@
+# Graphe circulaire 
+
+# Nodes : 5
+# Edges : 5
+
+0 1
+1 2
+2 3
+3 4
+4 0

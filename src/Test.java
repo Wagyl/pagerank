@@ -12,8 +12,10 @@ public class Test {
 			if (verbose)
 			System.out.println("Parsing : graph construction...");
 			this.graph.build((new MainTest()).loadFile(file));
-			if (verbose)
+			if (verbose) {
 				System.out.println("Parsing completed : graph built.");
+				System.out.println("Nodes : " +(this.graph.size() + 1) +  "     Edges : " + this.graph.bindsCount());
+			}
 			compute_stochastic(verbose);
 		} catch (FileNotFoundException e1) {
 			System.err.println("File not found.");

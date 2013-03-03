@@ -36,9 +36,13 @@ public class GraphParser {
 
 	/* Parse une ligne */
 	private void parseLine(String line) throws BadLineFormatException {
+		
 		int tmpKey, tmpVal;
 		StringTokenizer st = new StringTokenizer(line);
 
+		if (st.countTokens() == 0)
+			return;
+		
 		if (st.countTokens() != 2)
 			throw new BadLineFormatException();
 

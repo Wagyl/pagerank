@@ -1,0 +1,16 @@
+# Graphe fortement connexe, pgcd des longueurs des circuits = 1
+# convergence assurée vers le meme vecteur quel que soit le vecteur initial
+# et le facteur zap.
+
+# Nodes : 4
+# Edges : 8
+
+0 1
+1 0
+1 2
+2 1
+2 0
+
+0 2
+2 3
+3 0

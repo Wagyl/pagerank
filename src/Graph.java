@@ -56,6 +56,10 @@ public class Graph {
 		return size;
 	}
 	
+	public int bindsCount() {
+		return bindsCount;
+	}
+	
 	/*
 	 * Calcul de la matrice stochastique.
 	 */
