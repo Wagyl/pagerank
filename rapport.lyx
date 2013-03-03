@@ -585,10 +585,59 @@ circular graphe circulaire, donc similaire au précédent : on observe alors
 \end_layout
 
 \begin_layout Description
+well ce graphe comporte un 
+\begin_inset Quotes fld
+\end_inset
+
+puit
+\begin_inset Quotes frd
+\end_inset
+
+ : des liens permettent d'accéder au nœud 
+\begin_inset Formula $3$
+\end_inset
+
+, mais aucun d'en sortir.
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Ainsi, sans facteur zap, pagerank converge (lentement) vers le vecteur nul,
+ quel que soit le vecteur initial.
+ Un facteur zap non nul corrige ce 
+\begin_inset Quotes fld
+\end_inset
+
+problème
+\begin_inset Quotes frd
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Description
 petersen graphe symétrique cubique.
  Convergence assurée.
 \end_layout
 
+\begin_deeper
+\begin_layout Standard
+Appliqué à un graphe symétrique, si convergence il y a, alors pagerank converge
+ vers le vecteur équiprobable (
+\begin_inset Formula $1/\mathtt{size}$
+\end_inset
+
+ pour chaque nœuds).
+ Le résultat est immédiat à partir d'un vecteur initial équiprobable, et
+ peut être beaucoup plus long à propager sinon.
+\end_layout
+
+\begin_layout Standard
+Néanmoins, la convergence n'est pas toujours assurée (cf graphe circulaire).
+\end_layout
+
+\end_deeper
 \begin_layout Description
 clique convergence assurée (clique implique fortement connexe et pgcd des
  longueurs des circuits 
@@ -606,8 +655,6 @@ Sur une clique, quel que soient le facteur zap et le vecteur initial, le
 \end_inset
 
  pour chaque nœuds).
- Le résultat est immédiat à partir d'un vecteur initial équiprobable, et
- peut être beaucoup plus long à propager sinon.
 \end_layout
 
 \end_deeper
@@ -706,7 +753,7 @@ En particulier, sur un graphe non connexe, il permet d'attribuer une valeur
 \end_layout
 
 \begin_layout Standard
-C'est pour toutes ses raisons que notre algorithme utilise le vecteur équiprobab
+C'est pour toutes ces raisons que notre algorithme utilise le vecteur équiprobab
 le par défaut.
 \end_layout
 
@@ -717,7 +764,7 @@ Facteur zap
 \begin_layout Standard
 Le facteur ZAP représente, dans le modèle du surfeur imaginaire sur lequel
  se base le PageRank, la probabilité que le dit surfeur arrête de cliquer
- sur les liens et choisisse d'aller à une page alléatoire.
+ sur les liens et choisisse d'aller à une page aléatoire.
  
 \end_layout
 
@@ -731,7 +778,11 @@ ZAP = 0 : le surfeur clique inlassablement sur les liens.
 
 \begin_layout Itemize
 ZAP = 1 : le surfeur ne clique jamais sur les liens, il ne fait que sauter
- alléatoirement de page en page.
+ aléatoirement de page en page.
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -758,25 +809,77 @@ uniforme
 
 \begin_layout Standard
 Avec un facteur ZAP nul, l'algorithme met 79 itérations pour converger alors
- qu'avec un facteur ZAP de 0.85 il suffti de 9 itérations.
+ qu'avec un facteur ZAP de 0.85 il suffit de 9 itérations.
 \end_layout
 
 \begin_layout Standard
 Il est de plus à noter qu'avec un facteur ZAP de 0.85 la répartition des
  PageRank pour les différentes pages est assez uniforme alors qu'avec un
- ZAP nul les PageRank des noeuds 0, 1 et 2 sont deux fois plus élevés que
- ceux des noeuds 3, 4, 5 et 6.
+ ZAP nul les PageRank des nœuds 0, 1 et 2 sont deux fois plus élevés que
+ ceux des nœuds 3, 4, 5 et 6.
  
 \end_layout
 
 \begin_layout Standard
-Etant donné la forme du graphe, ce résultat est peu étonnant.
+Étant donné la forme du graphe, ce résultat n'est pas étonnant.
  En effet, avec un facteur ZAP proche de 1, la forme du graphe est très
- peu prise en compte dans le calcul du PageRank, le fait que les noeuds
- 0, 1 et 2 forment une boucle n'influe que très peu sur les résultats dans
+ peu prise en compte dans le calcul du PageRank, le fait que les nœuds 0,
+ 1 et 2 forment une boucle n'influe que très peu sur les résultats dans
  ce cas là, alors qu'avec un facteur ZAP nul, seule la forme du graphe importe
- et la probabilité d'arriver sur l'un des noeuds de la boucle est deux fois
- plus élevée que pour les trois autres noeuds.
+ et la probabilité d'arriver sur l'un des nœuds de la boucle est deux fois
+ plus élevée que pour les trois autres nœuds.
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Sur certains graphes, un facteur zap non nul peut également faire converger
+ pagerank vers des résultats plus intéressants, en éliminant par exemple
+ les 
+\begin_inset Quotes fld
+\end_inset
+
+puits
+\begin_inset Quotes frd
+\end_inset
+
+, ces nœuds dont aucun lien ne sort, mais dont on peut alors 
+\begin_inset Quotes fld
+\end_inset
+
+s'échapper
+\begin_inset Quotes frd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Sur d'autres, il permet de faire converger pagerank vers une même solution
+ quel que soit le vecteur initial, lorsque l'algorithme sans facteur zap
+ diverge selon les cas (cf 
+\family typewriter
+circular
+\family default
+), ce qui tend à montrer que cette solution est effectivement judicieuse.
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+D'une manière générale, même faible, un facteur zap non nul tend à améliorer
+ la pertinence du résultat et la rapidité de son calcul.
+\end_layout
+
+\begin_layout Standard
+Mais plus le facteur zap est élevé, plus la convergence est rapide et moins
+ les résultats sont pertinents : les nœuds du graphes tendent alors à obtenir
+ des valeurs proches.
+ Il s'agit donc de trouver un juste équilibre ans le choix de ce facteur.
 \end_layout
 
 \begin_layout Section
@@ -832,6 +935,28 @@ uniforme
  et un facteur zap positif, et qu'on obtient assez rapidement des valeurs
  permettant de distinguer certains nœuds (par exemple, avec un facteur zap
  nul, certains nœuds sont très vites écartées avec une valeur nulle).
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Notons que sur une même ligne de la matrice stochastique d'un graphe, les
+ cases non nulles ont toutes la même valeur (
+\begin_inset Formula $1/\mathtt{degree}$
+\end_inset
+
+) ; il serait donc possible de compresser encore la taille de la représentation
+ de cette matrice, en ne gardant de C qu'un tableau de longueur 
+\begin_inset Formula $n$
+\end_inset
+
+, où 
+\begin_inset Formula $n$
+\end_inset
+
+ est le nombre de ligne de la matrice.
 \end_layout
 
 \end_body
