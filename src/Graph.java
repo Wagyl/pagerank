@@ -85,7 +85,7 @@ public class Graph {
 	}
 	
 	/*
-	 * Pagerank.
+	 * Pagerank naïf.
 	 */
 
 	public FVect pagerank0(int count) {
@@ -112,6 +112,10 @@ public class Graph {
 		}
 		return tmp;
 	}
+	
+	/*
+	 * Pagerank final.
+	 */
 	
 	public static Result zapPagerank(FMatrix m, FVect z, int count, float epsilon, float zap) {
 		FVect result = z;

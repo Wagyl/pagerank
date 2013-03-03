@@ -1,8 +1,7 @@
-import java.util.ArrayList;
-import java.util.List;
-
 public class MainTest {
 
+	public static boolean verbose = true;
+	
 	public static Float fl(int i) {
 		return new Float(i);
 	}
@@ -36,7 +35,7 @@ public class MainTest {
 				z0 = Integer.parseInt(args[4]);
 			
 			
-			(new Test(file, true)).pagerank(zap, count, epsilon, z0);
+			(new Test(file, verbose)).pagerank(zap, count, epsilon, z0);
 			
 		}
 	}
