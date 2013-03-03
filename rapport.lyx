@@ -306,6 +306,10 @@ MainTest
 Main, parsing des arguments, exécution du test.
 \end_layout
 
+\begin_layout Subsection
+Algorithme
+\end_layout
+
 \begin_layout Section
 Complexité
 \end_layout
@@ -376,12 +380,67 @@ Ce calcul est donc en
 Multiplication de la transposée d'une matrice par un vecteur
 \end_layout
 
+\begin_layout Standard
+Bien que l'algorithme soit différent, la complexité est identique à celle
+ de la multiplication de la matrice elle-mêe par un vecteur :
+\end_layout
+
+\begin_layout Itemize
+deux accès à un tableau par ligne ;
+\end_layout
+
+\begin_layout Itemize
+pour chaque élément non nul, trois accès à un tableau, deux opérations arithméti
+ques, une écriture dans un tableau.
+\end_layout
+
+\begin_layout Standard
+Soit un temps constant pour chaque élément non nul, et un temps constant
+ par ligne : complexité en 
+\begin_inset Formula $O(n+m)$
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Section
 Résultats et interprétation
 \end_layout
 
+\begin_layout Standard
+Le répertoire 
+\family typewriter
+examples
+\family default
+/ contient quelques fichiers descriptifs de graphes simples et pertinents
+ permettant de tester l'algorithme.
+\end_layout
+
 \begin_layout Section
 Performance
+\end_layout
+
+\begin_layout Standard
+Sur le fichier 
+\family typewriter
+web-Stanford.txt
+\family default
+, disponible à l'adresse 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://snap.stanford.edu/data/web-Stanford.html
+\end_layout
+
+\end_inset
+
+, décrivant un graphe de près de 300 000 nœuds et de plus de 2 millions
+ d'arcs, notre programme construit le graphe et calcule la matrice stochastique
+ associée en quelques secondes et opère une centaine d'itérations de l'algorithm
+e de pagerank en 10 à 20 secondes sur nos ordinateurs portables, ce qui
+ nous semble parfaitement honorable.
 \end_layout
 
 \end_body
