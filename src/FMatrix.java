@@ -22,8 +22,8 @@ public class FMatrix extends Matrix<Float> {
 	/*
 	 * Multiplication par un vecteur.
 	 */
-	public FVect mult(Vect<Float> l) throws IncompatibleSize {
-		if (l.size() != this.C.size() - 1)
+	public FVect mult_naive(Vect<Float> l) throws IncompatibleSize {
+		if (l.size() != this.size())
 			throw new IncompatibleSize();
 		FVect res = new FVect();
 		int max = l.size();
@@ -32,6 +32,24 @@ public class FMatrix extends Matrix<Float> {
 			tmp = 0;
 			for (int j = 0; j < max; j++)
 				tmp += l.get(j) * this.get(i, j);
+			res.add(tmp);
+		}
+		return res;
+	}
+	
+	public FVect mult(Vect<Float> l) throws IncompatibleSize {
+		if (l.size() != this.size())
+			throw new IncompatibleSize();
+		FVect res = new FVect();
+		float tmp;
+		for (int row = 0; row < l.size(); row++) {
+			tmp = 0;
+			int i0 = this.L.get(row);
+			int max = this.L.get(row+1);
+			for (int j = i0; j < max; j++) {
+				int col = this.I.get(j);
+				tmp += l.get(col) * this.C.get(j);
+			}
 			res.add(tmp);
 		}
 		return res;
