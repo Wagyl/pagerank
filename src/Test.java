@@ -11,7 +11,7 @@ public class Test {
 			this.graph = new Graph();
 			if (verbose)
 			System.out.println("Parsing : graph construction...");
-			this.graph.build((new MainTest()).loadFile(file));
+			this.graph.build(file); //(new MainTest()).loadFile(file));
 			if (verbose) {
 				System.out.println("Parsing completed : graph built.");
 				System.out.println("Nodes : " +(this.graph.size() + 1) +  "     Edges : " + this.graph.bindsCount());
