@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.nio.file.Paths;
 
 public class MainTest {
@@ -28,7 +30,14 @@ public class MainTest {
 					.println("Usage : java MainTest file [zap count epsilon z]");
 		else {
 
-			String file = loadFile(args[0]);
+			FileReader file;
+			try {
+				file = new FileReader(loadFile(args[0]));
+			} catch (FileNotFoundException e) {
+				System.err.println("File not found.");
+				return;
+			}
+
 			if (args.length > 1)
 				zap = Float.parseFloat(args[1]);
 			if (args.length > 2)

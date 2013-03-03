@@ -16,10 +16,10 @@ public class GraphParser {
 	}
 
 	/* Parse le fichier */
-	public void parseFile(String source) throws IOException {
+	public void parseFile(FileReader source) throws IOException {
 		String[] nextLine;
 		int count = 1;
-		reader = new CSVReader(new FileReader(source), '\n');
+		reader = new CSVReader(source, '\n');
 
 		while ((nextLine = reader.readNext()) != null) {
 			if (!nextLine[0].startsWith("#"))
@@ -36,13 +36,13 @@ public class GraphParser {
 
 	/* Parse une ligne */
 	private void parseLine(String line) throws BadLineFormatException {
-		
+
 		int tmpKey, tmpVal;
 		StringTokenizer st = new StringTokenizer(line);
 
 		if (st.countTokens() == 0)
 			return;
-		
+
 		if (st.countTokens() != 2)
 			throw new BadLineFormatException();
 

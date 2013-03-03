@@ -1,3 +1,4 @@
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,7 +25,7 @@ public class Graph {
 	/*
 	 * Construction du graphe par appel au parser sur un fichier.
 	 */
-	public void build(String source) throws IOException {
+	public void build(FileReader source) throws IOException {
 		(new GraphParser(this)).parseFile(source);
 	}
 
