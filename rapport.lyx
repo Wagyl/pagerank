@@ -714,6 +714,71 @@ le par défaut.
 Facteur zap
 \end_layout
 
+\begin_layout Standard
+Le facteur ZAP représente, dans le modèle du surfeur imaginaire sur lequel
+ se base le PageRank, la probabilité que le dit surfeur arrête de cliquer
+ sur les liens et choisisse d'aller à une page alléatoire.
+ 
+\end_layout
+
+\begin_layout Standard
+On peut clarifier ceci en prenant les deux cas extrêmes :
+\end_layout
+
+\begin_layout Itemize
+ZAP = 0 : le surfeur clique inlassablement sur les liens.
+\end_layout
+
+\begin_layout Itemize
+ZAP = 1 : le surfeur ne clique jamais sur les liens, il ne fait que sauter
+ alléatoirement de page en page.
+\end_layout
+
+\begin_layout Standard
+Un facteur ZAP non nul fait converger plus vite le PageRank de chaque page.
+ Un exemple flagrant de ce phénomène est notre exemple 
+\begin_inset Quotes fld
+\end_inset
+
+divergent
+\begin_inset Quotes frd
+\end_inset
+
+.
+ Les tests sont faits avec un vecteur initial 
+\begin_inset Quotes fld
+\end_inset
+
+uniforme
+\begin_inset Quotes frd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Avec un facteur ZAP nul, l'algorithme met 79 itérations pour converger alors
+ qu'avec un facteur ZAP de 0.85 il suffti de 9 itérations.
+\end_layout
+
+\begin_layout Standard
+Il est de plus à noter qu'avec un facteur ZAP de 0.85 la répartition des
+ PageRank pour les différentes pages est assez uniforme alors qu'avec un
+ ZAP nul les PageRank des noeuds 0, 1 et 2 sont deux fois plus élevés que
+ ceux des noeuds 3, 4, 5 et 6.
+ 
+\end_layout
+
+\begin_layout Standard
+Etant donné la forme du graphe, ce résultat est peu étonnant.
+ En effet, avec un facteur ZAP proche de 1, la forme du graphe est très
+ peu prise en compte dans le calcul du PageRank, le fait que les noeuds
+ 0, 1 et 2 forment une boucle n'influe que très peu sur les résultats dans
+ ce cas là, alors qu'avec un facteur ZAP nul, seule la forme du graphe importe
+ et la probabilité d'arriver sur l'un des noeuds de la boucle est deux fois
+ plus élevée que pour les trois autres noeuds.
+\end_layout
+
 \begin_layout Section
 Performance
 \end_layout
