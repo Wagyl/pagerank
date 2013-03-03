@@ -1,0 +1,29 @@
+
+                        Moteur de recherche.
+
+Auteurs : Nicolas Chenciner et David Buhler
+
+
+Compilation :
+$ make
+
+
+Exécution :
+$ ./pagerank file [zap count epsilon z]
+
+Seul l'argument file est indispensable.
+
+
+Options :
+
+file :    nom du fichier contenant la description du graphe.
+zap :     facteur zap de l'algorithme ; 0 par défaut.
+count :   nombre d'itérations maximum de l'algorithme ; 100 par défaut.
+epsilon : distance maximale entre deux itérations avant l'arret de l'algorithme;
+          0 par défaut (l'algorithme ne s'arrete que s'il y a convergence, 
+	  i.e. deux vecteurs successifs sont égaux).
+z :       modifie le vecteur z0 ;
+  	  si z est négatif, l'algorithme débute sur un vecteur dont chaque case
+	  vaut (1 / length).
+	  si z est positif, l'algorithme débute sur un vecteur dont chaque case
+	  vaut 0 sauf z qui vaut 1.
