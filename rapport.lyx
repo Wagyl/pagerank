@@ -310,6 +310,72 @@ Main, parsing des arguments, exécution du test.
 Complexité
 \end_layout
 
+\begin_layout Subsection
+Multiplication d'une matrice par un vecteur
+\end_layout
+
+\begin_layout Standard
+La méthode mult_naive effectue un appel à get pour chaque élément du tableau
+ selon un parcours des lignes et des colonnes ; get étant de complexité
+ 
+\begin_inset Formula $O(n)$
+\end_inset
+
+ (potentiellement une opération par colonne), elle opère donc en 
+\begin_inset Formula $O(n^{3})$
+\end_inset
+
+, où 
+\begin_inset Formula $n$
+\end_inset
+
+ est la longueur de la matrice carrée.
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La méthode mult est nettement plus efficace, puisqu'elle ne considère que
+ les éléments non nuls de la matrice en cherchant directement dans les trois
+ tableaux de la structure : elle effectue
+\end_layout
+
+\begin_layout Itemize
+deux accès au tableau L pour chaque ligne ;
+\end_layout
+
+\begin_layout Itemize
+pour chaque élément non nul, un accès à I, un accès à C, une multiplication
+ et une addition.
+\end_layout
+
+\begin_layout Standard
+Soit un nombre fixe d'opérations pour chaque ligne et chaque élément non
+ nul.
+\end_layout
+
+\begin_layout Standard
+Ce calcul est donc en 
+\begin_inset Formula $O(n+m)$
+\end_inset
+
+ où 
+\begin_inset Formula $n$
+\end_inset
+
+ est le nombre de lignes de la matrice et 
+\begin_inset Formula $m$
+\end_inset
+
+ le nombre d'éléments non nul.
+\end_layout
+
+\begin_layout Subsection
+Multiplication de la transposée d'une matrice par un vecteur
+\end_layout
+
 \begin_layout Section
 Résultats et interprétation
 \end_layout
