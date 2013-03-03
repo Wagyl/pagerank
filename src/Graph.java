@@ -127,6 +127,7 @@ public class Graph {
 				if (norm <= epsilon) {
 					return new Result(result, i+1, norm, zap);
 				}
+				previous = result;
 			} catch (IncompatibleSize e) {
 				e.printStackTrace();
 				return new Result(new FVect(), i, 0, zap);

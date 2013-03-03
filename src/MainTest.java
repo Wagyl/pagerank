@@ -9,22 +9,6 @@ public class MainTest {
 	public static Float fl(double d) {
 		return new Float(d);
 	}
-	
-	public static List<Float> translate(float[] tab) {
-		List<Float> res = new ArrayList<Float>(tab.length);
-		for (int i = 0; i < tab.length; i++) {
-			res.add(tab[i]);
-		}
-		return res;
-	}
-
-	public static void print(List<Float> l) {
-		for (int i = 0; i < l.size(); i++)
-			System.out.print(l.get(i) + " ");
-		System.out.println();
-	}
-	
-	
 
 	public String loadFile(String addr) {
 		return this.getClass().getResource(addr).getPath();
@@ -38,7 +22,7 @@ public class MainTest {
 		int z0 = -1;
 		
 		if (args.length < 1)
-			System.out.println("Usage : java MainTest file");
+			System.out.println("Usage : java MainTest file [zap count epsilon z]");
 		else {
 			
 			String file = args[0];
