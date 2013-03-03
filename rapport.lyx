@@ -879,7 +879,7 @@ D'une manière générale, même faible, un facteur zap non nul tend à amélior
 Mais plus le facteur zap est élevé, plus la convergence est rapide et moins
  les résultats sont pertinents : les nœuds du graphes tendent alors à obtenir
  des valeurs proches.
- Il s'agit donc de trouver un juste équilibre ans le choix de ce facteur.
+ Il s'agit donc de trouver un juste équilibre dans le choix de ce facteur.
 \end_layout
 
 \begin_layout Section
