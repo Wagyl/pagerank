@@ -31,12 +31,29 @@ public class MainTest {
 	}
 
 	public static void main(String[] args) {
-
-		/*
-		 * Test méthode parse de Graph.
-		 */
-
-		(new Test("web-Stanford.txt", true)).pagerank(fl(0), 100);
-
+		
+		float zap = 0;
+		int count = 100;
+		float epsilon = 0;
+		int z0 = -1;
+		
+		if (args.length < 1)
+			System.out.println("Usage : java MainTest file");
+		else {
+			
+			String file = args[0];
+			if (args.length > 1)
+				zap = Float.parseFloat(args[1]);
+			if (args.length > 2)
+				count = Integer.parseInt(args[2]);
+			if (args.length > 3)
+				epsilon = Float.parseFloat(args[3]);
+			if (args.length > 4)
+				z0 = Integer.parseInt(args[4]);
+			
+			
+			(new Test(file, true)).pagerank(zap, count, epsilon, z0);
+			
+		}
 	}
 }

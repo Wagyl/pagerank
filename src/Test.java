@@ -31,12 +31,19 @@ public class Test {
 	}
 	
 	
-	public void pagerank(float zap, int count) {
+	public void pagerank(float zap, int count, float epsilon, int z0) {
 		int size = graph.size() +1;
-		float value = (float) 1 / size;
-		FVect z0 = new FVect(size, value);
+		FVect z;
+		if (z0 >= 0 && z0 < size) {
+			z = new FVect(size, (float) 0);
+			z.set(z0, (float) 1);
+		}
+		else {
+			float value = (float) 1 / size;
+			z = new FVect(size, value);
+		}
 		System.out.println("Pagerank computation : " + count + " itérations...");
-		Result result = Graph.zapPagerank(stochastic, z0, count, 0, zap);
+		Result result = Graph.zapPagerank(stochastic, z, count, epsilon, zap);
 		System.out.println("Computation done.");
 		
 		System.out.println();
