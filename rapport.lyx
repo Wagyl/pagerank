@@ -88,6 +88,21 @@ Un makefile est fourni :
 $ make
 \end_layout
 
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Java 
+\begin_inset Formula $7$
+\end_inset
+
+ est nécessaire.
+\end_layout
+
 \begin_layout Paragraph
 Exécution :
 \end_layout
@@ -407,6 +422,10 @@ Soit un temps constant pour chaque élément non nul, et un temps constant
 Résultats et interprétation
 \end_layout
 
+\begin_layout Subsection
+Exemples
+\end_layout
+
 \begin_layout Standard
 Le répertoire 
 \family typewriter
@@ -414,6 +433,139 @@ examples
 \family default
 / contient quelques fichiers descriptifs de graphes simples et pertinents
  permettant de tester l'algorithme.
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Notons au préalable que les résultats ne peuvent être garantis avec une
+ précision supérieur à 
+\begin_inset Formula $10^{-8}$
+\end_inset
+
+ ; seront donc considérés identiques des résultats ne différant que par
+ leur huitième décimale après la virgule.
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Description
+convergence graphe fortement connexe, pgcd des longueurs des circuits 
+\begin_inset Formula $=1$
+\end_inset
+
+ : convergence assurée quel que soit le vecteur initial (et c'est bien le
+ résultat observé, ouf).
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+On note que la convergence est néanmoins légèrement plus rapide à partir
+ du vecteur initial uniforme 
+\begin_inset Formula $[0.25\,0.25\,0.25\,0.25]$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Description
+divergent graphe fortement connexe, mais dont le pgdc des longueurs des
+ circuits vaut 
+\begin_inset Formula $3$
+\end_inset
+
+ : la convergence n'est plus assurée.
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Ainsi, si pagerank converge rapidement à partir du vecteur initial équiprobable,
+ ce n'est plus le cas si l'on part d'un vecteur de type 
+\begin_inset Formula $[1\,0\,0\,\ldots]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+En revanche, avec un facteur zap non nul fixé, pagerank converge vers un
+ même résultat quel que soit le vecteur initial, mais encore une fois beaucoup
+ plus rapidement à partir du vecteur 
+\begin_inset Quotes fld
+\end_inset
+
+uniforme
+\begin_inset Quotes frd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Si ce résultat diffère de celui obtenu avec un facteur zap nul et un vecteur
+ initial 
+\begin_inset Quotes fld
+\end_inset
+
+uniforme
+\begin_inset Quotes frd
+\end_inset
+
+, le classement des nœuds reste inchangé.
+\end_layout
+
+\begin_layout Standard
+Plus le facteur zap est élevé, plus la convergence est rapide, mais moins
+ les résultats sont pertinents : les nœuds du graphes tendent alors à obtenir
+ des valeurs proches.
+ Il s'agit donc de trouver un équilibre entre rapidité de la convergence
+ et pertinence du résultat.
+\end_layout
+
+\end_deeper
+\begin_layout Description
+circular graphe circulaire, donc similaire au précédent : on observe alors
+ les mêmes résultats, de manière encore plus flagrante.
+\end_layout
+
+\begin_layout Description
+petersen graphe symétrique cubique.
+ Convergence assurée.
+\end_layout
+
+\begin_layout Description
+clique convergence assurée (clique implique fortement connexe et pgcd des
+ longueurs des circuits 
+\begin_inset Formula $=1$
+\end_inset
+
+).
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Sur une clique, quel que soient le facteur zap et le vecteur initial, le
+ résultat final sera nécessairement équiprobable (
+\begin_inset Formula $1/\mathtt{size}$
+\end_inset
+
+ pour chaque nœuds).
+ Le résultat est immédiat à partir d'un vecteur initial équiprobable, et
+ peut être beaucoup plus long à propager sinon.
+\end_layout
+
+\end_deeper
+\begin_layout Subsection
+Vecteur initial
+\end_layout
+
+\begin_layout Subsection
+Remarques
 \end_layout
 
 \begin_layout Section
@@ -441,6 +593,34 @@ http://snap.stanford.edu/data/web-Stanford.html
  associée en quelques secondes et opère une centaine d'itérations de l'algorithm
 e de pagerank en 10 à 20 secondes sur nos ordinateurs portables, ce qui
  nous semble parfaitement honorable.
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Sur ce graphe, pagerank ne parvient pas à trouver un point fixe (en tout
+ cas, pas en moins de 
+\begin_inset Formula $1000$
+\end_inset
+
+ itérations).
+\end_layout
+
+\begin_layout Standard
+On note néanmoins que le résultat converge sensiblement plus rapidement
+ avec un vecteur initial 
+\begin_inset Quotes fld
+\end_inset
+
+uniforme
+\begin_inset Quotes frd
+\end_inset
+
+ et un facteur zap positif, et qu'on obtient assez rapidement des valeurs
+ permettant de distinguer certains nœuds (par exemple, avec un facteur zap
+ nul, certains nœuds sont très vites écartées avec une valeur nulle).
 \end_layout
 
 \end_body
