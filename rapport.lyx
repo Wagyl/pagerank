@@ -231,7 +231,7 @@ examples/
 \end_layout
 
 \begin_layout Itemize
-les lignes vides ou commencant par le caractère # sont ignorées ;
+les lignes vides ou commençant par le caractère # sont ignorées ;
 \end_layout
 
 \begin_layout Itemize
@@ -370,9 +370,20 @@ Multiplication d'une matrice par un vecteur
 \end_layout
 
 \begin_layout Standard
-La méthode mult_naive effectue un appel à get pour chaque élément du tableau
- selon un parcours des lignes et des colonnes ; get étant de complexité
- 
+La méthode 
+\family typewriter
+mult_naive
+\family default
+ effectue un appel à 
+\family typewriter
+get
+\family default
+ pour chaque élément du tableau selon un parcours des lignes et des colonnes
+ ; 
+\family typewriter
+get
+\family default
+ étant de complexité 
 \begin_inset Formula $O(n)$
 \end_inset
 
@@ -392,9 +403,13 @@ La méthode mult_naive effectue un appel à get pour chaque élément du tableau
 \end_layout
 
 \begin_layout Standard
-La méthode mult est nettement plus efficace, puisqu'elle ne considère que
- les éléments non nuls de la matrice en cherchant directement dans les trois
- tableaux de la structure : elle effectue
+La méthode 
+\family typewriter
+mult
+\family default
+ est nettement plus efficace, puisqu'elle ne considère que les éléments
+ non nuls de la matrice en cherchant directement dans les trois tableaux
+ de la structure : elle effectue
 \end_layout
 
 \begin_layout Itemize
@@ -433,7 +448,7 @@ Multiplication de la transposée d'une matrice par un vecteur
 
 \begin_layout Standard
 Bien que l'algorithme soit différent, la complexité est identique à celle
- de la multiplication de la matrice elle-mêe par un vecteur :
+ de la multiplication de la matrice elle-même par un vecteur :
 \end_layout
 
 \begin_layout Itemize
