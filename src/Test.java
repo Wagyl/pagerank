@@ -39,7 +39,7 @@ public class Test {
 		z0 = Graph.zapPagerank(stochastic, z0, count, zap);
 		System.out.println("Computation done.");
 		
-		System.out.println(z0.get(2));	
+		System.out.println(z0.shortString());	
 	}
 
 }

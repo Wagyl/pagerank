@@ -37,4 +37,20 @@ public class FVect extends Vect<Float> {
 		}
 	}
 	
+	/* Distance entre deux vecteurs */
+	
+	public float norm(FVect other) throws IncompatibleSize {
+		int size = this.size();
+		if (other.size() != size) {
+			throw new IncompatibleSize();
+		}
+		float diff = 0;
+		float tmp;
+		for (int i = 0; i < size; i++) {
+			tmp = this.get(i) - other.get(i);
+			diff += tmp * tmp;
+		}
+		return (float) Math.sqrt(diff);
+	}
+	
 }
