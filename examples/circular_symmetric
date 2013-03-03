@@ -1,0 +1,13 @@
+# Graphe circulaire et symétrique
+
+# Nodes : 4
+# Edges : 8
+
+0 1
+1 2
+2 3
+3 0
+0 3
+3 2
+2 1
+1 0
