@@ -195,8 +195,127 @@ i j
 .
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Explication de code
+\end_layout
+
+\begin_layout Subsection
+Découpage des classes
+\end_layout
+
+\begin_layout Paragraph
+Vect<T>
+\end_layout
+
+\begin_layout Standard
+Classe paramétrée représentant un vecteur de type T ; plusieurs constructeurs
+ permettent d'initialiser facilement un vecteur, à partir d'une liste, d'un
+ tableau ou d'une valeur par défaut.
+\end_layout
+
+\begin_layout Paragraph
+FVect
+\end_layout
+
+\begin_layout Standard
+Vecteur de type float ; dispose des opérations d'addition et de multiplication
+ par une constante, ainsi que du calcul de la norme entre deux vecteurs.
+\end_layout
+
+\begin_layout Paragraph
+Matrix<T>
+\end_layout
+
+\begin_layout Standard
+Matrice de type T, dans le format décrit par l'énoncé, avec les méthodes
+ permettant d'accéder aux valeurs ou de les modifier.
+\end_layout
+
+\begin_layout Paragraph
+FMatrix
+\end_layout
+
+\begin_layout Standard
+Matrice de type float ; dispose des opérations de multiplication et de multiplic
+ation 
+\begin_inset Quotes fld
+\end_inset
+
+transposée
+\begin_inset Quotes frd
+\end_inset
+
+ par un 
+\family typewriter
+FVect
+\family default
+.
+\end_layout
+
+\begin_layout Paragraph
+Graph
+\end_layout
+
+\begin_layout Standard
+Représentation d'un graphe, sous forme de hashmap.
+ La méthode 
+\family typewriter
+stoch
+\family default
+ calcule la matrice stochastique associée de manière optimale.
+ Contient également la méthode statique 
+\family typewriter
+zapPagerank
+\family default
+.
+\end_layout
+
+\begin_layout Paragraph
+GraphParser
+\end_layout
+
+\begin_layout Standard
+Lecture d'un fichier et construction du graphe associé.
+\end_layout
+
+\begin_layout Paragraph
+Test
+\end_layout
+
+\begin_layout Standard
+Exécution d'un test : construction du graphe à partir d'un fichier, calcul
+ de la matrice stochastique, exécution de l'algorithme 
+\emph on
+pagerank
+\emph default
+ avec les paramètres donnés, affichage des résultats.
+\end_layout
+
+\begin_layout Paragraph
+MainTest
+\end_layout
+
+\begin_layout Standard
+Main, parsing des arguments, exécution du test.
+\end_layout
+
+\begin_layout Section
+Complexité
+\end_layout
+
+\begin_layout Section
+Résultats et interprétation
+\end_layout
+
+\begin_layout Section
+Performance
 \end_layout
 
 \end_body
