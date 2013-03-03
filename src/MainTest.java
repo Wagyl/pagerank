@@ -12,8 +12,8 @@ public class MainTest {
 		return new Float(d);
 	}
 
-	public String loadFile(String addr) {
-		return this.getClass().getResource(addr).getPath();
+	public static String loadFile(String addr) {
+		return Paths.get(addr).toAbsolutePath().toString();
 	}
 
 	public static void main(String[] args) {
@@ -28,7 +28,7 @@ public class MainTest {
 					.println("Usage : java MainTest file [zap count epsilon z]");
 		else {
 
-			String file = Paths.get(args[0]).toAbsolutePath().toString();
+			String file = loadFile(args[0]);
 			if (args.length > 1)
 				zap = Float.parseFloat(args[1]);
 			if (args.length > 2)
