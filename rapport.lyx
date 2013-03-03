@@ -85,6 +85,8 @@ Un makefile est fourni :
 \end_layout
 
 \begin_layout Quotation
+
+\family typewriter
 $ make
 \end_layout
 
@@ -108,6 +110,8 @@ Exécution :
 \end_layout
 
 \begin_layout Quotation
+
+\family typewriter
 $ ./pagerank file [zap count epsilon z]
 \end_layout
 
@@ -116,24 +120,64 @@ Options :
 \end_layout
 
 \begin_layout Itemize
-file : nom du fichier contenant la description du graphe.
+
+\family typewriter
+file
+\family default
+ : nom du fichier contenant la description du graphe.
 \end_layout
 
 \begin_layout Itemize
-zap : facteur zap (flottant) ; 0 par défaut.
+
+\family typewriter
+zap
+\family default
+ : facteur zap (flottant) ; 0 par défaut.
 \end_layout
 
 \begin_layout Itemize
-count : nombre maximum d'itérations de l'algorithme ; 0 par défaut.
+
+\family typewriter
+count
+\family default
+ : nombre maximum d'itérations de l'algorithme ; 0 par défaut.
 \end_layout
 
 \begin_layout Itemize
-epsilon : distance maximale entre deux vecteurs successifs calculés par
- l'algorithme ; 0 par défaut.
+
+\family typewriter
+epsilon 
+\family default
+: distance maximale entre deux vecteurs successifs calculés par l'algorithme
+ ; 0 par défaut.
 \end_layout
 
+\begin_deeper
+\begin_layout Standard
+L'algorithme de pagerank s'arrête dès lors que deux vecteurs successifs
+ sont de différence moindre que 
+\family typewriter
+epsilon
+\family default
+ donné en argument, ou lorsque le nombre d'itérations 
+\family typewriter
+count
+\family default
+ a été effectué.
+\end_layout
+
+\begin_layout Standard
+0 signifie donc que l'algorithme ne s'arrête que s'il a bien atteint la
+ convergence du résultat.
+\end_layout
+
+\end_deeper
 \begin_layout Itemize
-z : facteur influant sur le vecteur initial utilisé par l'algorithme :
+
+\family typewriter
+z
+\family default
+ : facteur influant sur le vecteur initial utilisé par l'algorithme :
 \end_layout
 
 \begin_deeper
@@ -219,10 +263,6 @@ i j
 
 \begin_layout Section
 Explication de code
-\end_layout
-
-\begin_layout Subsection
-Découpage des classes
 \end_layout
 
 \begin_layout Paragraph
@@ -319,10 +359,6 @@ MainTest
 
 \begin_layout Standard
 Main, parsing des arguments, exécution du test.
-\end_layout
-
-\begin_layout Subsection
-Algorithme
 \end_layout
 
 \begin_layout Section
@@ -618,13 +654,6 @@ Sur la plupart des graphes, pagerank converge nettement plus rapidement
 \begin_layout Standard
 Qui plus est, le vecteur équiprobable est généralement plus proche du résultat
  (peu de nœuds finissent avec une valeur nulle).
-\end_layout
-
-\begin_layout Standard
-\begin_inset space ~
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
