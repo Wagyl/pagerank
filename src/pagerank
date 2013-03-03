@@ -1,0 +1,4 @@
+#!/bin/bash
+# Exécution d'un test de pagrank
+
+java -classpath bin/:lib/opencsv-2.3.jar MainTest $@
