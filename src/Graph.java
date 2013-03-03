@@ -1,4 +1,3 @@
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,18 +14,15 @@ public class Graph {
 	private int size;
 	/* Nombre d'arcs */
 	private int bindsCount;
-	/* Parser */
-	GraphParser parser;
 
-	public Graph() throws FileNotFoundException {
+	public Graph() {
 		this.data = new HashMap<Integer, List<Integer>>();
 		this.size = 0;
 		this.bindsCount = 0;
-		this.parser = new GraphParser(this);
 	}
 
 	public void build(String source) throws IOException {
-		this.parser.parseFile(source);
+		(new GraphParser(this)).parseFile(source);
 	}
 
 	public void add(Integer node, Integer arc) {

@@ -1,5 +1,3 @@
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,35 +30,12 @@ public class MainTest {
 		return this.getClass().getResource(addr).getPath();
 	}
 
-	public static void mainparser() {
-		try {
-			GraphParserDeprecated parsed = new GraphParserDeprecated(
-					(new MainTest()).loadFile("web-Stanford.txt"));
-			parsed.work();
-			GraphMatrix graphStanford = new GraphMatrix(parsed.getMax());
-			int max = parsed.getMax();
-			int i = 0;
-			for (Peer p : parsed.getList()) {
-				graphStanford.addArc(p.fst(), p.snd());
-				if (i % 10000 == 0)
-					System.out.print(" ... " + (i * 100 / max) + "%   ");
-				i++;
-			}
-			System.out.println();
-			System.out.println("Graph construit");
-		} catch (FileNotFoundException e) {
-			System.out.println("Fichier non trouvé");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
 	public static void main(String[] args) {
 
 		float[] tab = new float[] { 0, 3, 5, 8, 1, 0, 2, 0, 0, 0, 0, 0, 0, 3,
 				0, 0 };
 
-		FMatrix m = new FMatrix(translate(tab), 4, 4);
+		// FMatrix m = new FMatrix(translate(tab), 4, 4);
 
 		/*
 		 * m.print();
@@ -69,12 +44,6 @@ public class MainTest {
 		 * System.out.print(m.get(i, j) + " "); } System.out.println(""); }
 		 */
 
-		FVect vect = new FVect(new Float[] {fl(1), fl(3), fl(0), fl(1)});
-		try {
-			FVect r = m.multT(vect);
-		} catch (IncompatibleSize e1) {
-		}
-		//System.out.println(r.toString());
 
 		/*
 		 * FMatrix mm = new FMatrix(4); mm.set(0, 1, new Float(3)); mm.set(0, 2,
@@ -84,12 +53,12 @@ public class MainTest {
 		 * mm.print();
 		 */
 
-		GraphMatrix graph = new GraphMatrix(4);
-		graph.addArc(0, 1);
-		graph.addArc(1, 0);
-		graph.addArc(1, 2);
-		graph.addArc(2, 3);
-		graph.addArc(3, 0);
+		Graph graph = new Graph();
+		graph.add(0, 1);
+		graph.add(1, 0);
+		graph.add(1, 2);
+		graph.add(2, 3);
+		graph.add(3, 0);
 
 		graph.stoch().print();
 
@@ -111,10 +80,6 @@ public class MainTest {
 		z = Graph.pagerank(graph.stoch(), z, 1004);
 		System.out.println(z.toString());
 
-		/*
-		 * Test fichier Stanford, à compléter
-		 */
-		// mainparser();
 
 		/*
 		 * Test méthode parse de Graph.

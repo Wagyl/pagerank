@@ -1,4 +1,3 @@
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.StringTokenizer;
@@ -11,7 +10,7 @@ public class GraphParser {
 	private CSVReader reader;
 	private Graph data;
 
-	public GraphParser(Graph data) throws FileNotFoundException {
+	public GraphParser(Graph data) {
 		this.max = 0;
 		this.data = data;
 	}
