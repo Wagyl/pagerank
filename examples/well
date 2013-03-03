@@ -1,0 +1,15 @@
+# Well
+# Nodes : 5
+
+# Le noeud 3 est un "puit" : aucun lien sortant.
+# Convergence très lente vers le vecteur nulle avec un zap de 0.
+# Convergence vers un vecteur non nul avec un zap non nul, identique
+# quel que soit le vecteur initial.
+
+0 1
+0 3
+0 4
+4 1
+1 0
+1 2
+2 0

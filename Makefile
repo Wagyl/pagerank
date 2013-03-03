@@ -6,4 +6,4 @@ all :
 
 clean :
 	rm -f bin/*
-	rm pagerank
+	rm -f pagerank
