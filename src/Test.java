@@ -36,10 +36,11 @@ public class Test {
 		float value = (float) 1 / size;
 		FVect z0 = new FVect(size, value);
 		System.out.println("Pagerank computation : " + count + " itérations...");
-		z0 = Graph.zapPagerank(stochastic, z0, count, zap);
+		Result result = Graph.zapPagerank(stochastic, z0, count, 0, zap);
 		System.out.println("Computation done.");
 		
-		System.out.println(z0.shortString());	
+		System.out.println();
+		result.print();
 	}
 
 }

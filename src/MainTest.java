@@ -36,7 +36,6 @@ public class MainTest {
 		 * Test méthode parse de Graph.
 		 */
 
-		
 		(new Test("web-Stanford.txt", true)).pagerank(fl(0), 100);
 
 	}

@@ -21,10 +21,16 @@ public class Graph {
 		this.bindsCount = 0;
 	}
 
+	/*
+	 * Construction du graphe par appel au parser sur un fichier.
+	 */
 	public void build(String source) throws IOException {
 		(new GraphParser(this)).parseFile(source);
 	}
 
+	/*
+	 * Ajout d'un arc au graphe.
+	 */
 	public void add(Integer node, Integer arc) {
 		if (node > size)
 			size = node;
@@ -38,6 +44,10 @@ public class Graph {
 		}
 	}
 
+	/*
+	 * Accesseurs.
+	 */
+	
 	public List<Integer> get(Integer node) {
 		return data.get(node);
 	}
@@ -45,6 +55,10 @@ public class Graph {
 	public int size() {
 		return size;
 	}
+	
+	/*
+	 * Calcul de la matrice stochastique.
+	 */
 
 	public FMatrix stoch() {
 		List<Integer> L = new ArrayList<Integer>(size + 1);
@@ -69,6 +83,10 @@ public class Graph {
 		FMatrix stoch = new FMatrix(L, C, I);
 		return stoch;
 	}
+	
+	/*
+	 * Pagerank.
+	 */
 
 	public FVect pagerank0(int count) {
 		FVect z = new FVect(this.size(), new Float(0));
@@ -95,20 +113,25 @@ public class Graph {
 		return tmp;
 	}
 	
-	public static FVect zapPagerank(FMatrix m, FVect z, int count, float zap) {
-		FVect tmp = z;
+	public static Result zapPagerank(FMatrix m, FVect z, int count, float epsilon, float zap) {
+		FVect result = z;
+		FVect previous = z;
+		float norm = 0;
 		float size = z.size();
 		for (int i = 0; i < count; i++) {
 			try {
-				tmp = m.multT(tmp);
-				tmp.op_mul(1 - zap);
-				tmp.op_add(zap / size);
+				result = m.multT(previous);
+				result.op_mul(1 - zap);
+				result.op_add(zap / size);
+				norm = result.norm(previous);
+				if (norm <= epsilon) {
+					return new Result(result, i+1, norm, zap);
+				}
 			} catch (IncompatibleSize e) {
 				e.printStackTrace();
-				return null;
+				return new Result(new FVect(), i, 0, zap);
 			}
 		}
-		return tmp;
-		
+		return new Result(result, count, norm, zap);
 	}
 }
