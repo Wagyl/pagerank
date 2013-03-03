@@ -564,8 +564,110 @@ Sur une clique, quel que soient le facteur zap et le vecteur initial, le
 Vecteur initial
 \end_layout
 
+\begin_layout Standard
+Le vecteur initial, dont la somme des éléments vaut 
+\begin_inset Formula $1$
+\end_inset
+
+, représente la probabilité de se trouver sur une page au début de l'algorithme.
+ Le vecteur 
+\begin_inset Quotes fld
+\end_inset
+
+équiprobable
+\begin_inset Quotes frd
+\end_inset
+
+ (
+\begin_inset Formula $1/\mathtt{size}$
+\end_inset
+
+ à chaque nœuds) offre ainsi une même importance à chaque page, alors qu'un
+ vecteur 
+\begin_inset Formula $[1\,0\,0\,\ldots]$
+\end_inset
+
+ parcourt le graphe à partir d'un seul nœud.
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Sur la plupart des graphes, pagerank converge nettement plus rapidement
+ à partir du vecteur 
+\begin_inset Quotes fld
+\end_inset
+
+équiprobable
+\begin_inset Quotes frd
+\end_inset
+
+, ce qui semble parfaitement logique : à partir d'un vecteur 
+\begin_inset Formula $[1\,0\,0\,\ldots]$
+\end_inset
+
+, il faut le temps de propager les valeurs à tous les nœuds du graphe, les
+ premières itérations de l'algorithme ne concerneront que les nœuds autour
+ du premier ; et plus le graphe est grand, plus ce temps sera long.
+ À partir du vecteur équiprobable, les premières itérations transmettent
+ de l'information pour tous nœuds du graphe.
+\end_layout
+
+\begin_layout Standard
+Qui plus est, le vecteur équiprobable est généralement plus proche du résultat
+ (peu de nœuds finissent avec une valeur nulle).
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Évidemment, il est également possible de construire un graphe où pagerank
+ soit plus rapide à partir d'un autre vecteur (
+\family typewriter
+examples/node1
+\family default
+), mais ce type de graphe n'a que peu d'intérêt et n'a aucune chance d'être
+ rencontré lors d'une analyse du web.
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Sur les graphes dont le résultat dépend du vecteur initial, le résultat
+ est plus cohérent à partir du vecteur équiprobable.
+ Sur les graphes circulaires, par exemple, il attribue à chaque nœud une
+ valeur égale, alors qu'un autre vecteur ne convergerait pas.
+\end_layout
+
+\begin_layout Standard
+En particulier, sur un graphe non connexe, il permet d'attribuer une valeur
+ non nulle à chaque composante, alors qu'un vecteur 
+\begin_inset Formula $[1\,0\,0\,\ldots]$
+\end_inset
+
+, ne s'occuperait que de l'une d'elles.
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+C'est pour toutes ses raisons que notre algorithme utilise le vecteur équiprobab
+le par défaut.
+\end_layout
+
 \begin_layout Subsection
-Remarques
+Facteur zap
 \end_layout
 
 \begin_layout Section
